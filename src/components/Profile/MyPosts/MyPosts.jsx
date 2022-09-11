@@ -27,7 +27,7 @@ const MyPosts = React.memo((props) => {
     const postsElements = [...props.posts]//делаем копию массива чтоб не менять state
     .reverse()//переворачиваем последовательность постов
     .map( p => <Post key={p.id} id={p.id} message={p.message} likesCount={p.likesCount} />);
-    const newPostElement = React.createRef();
+    //const newPostElement = React.createRef();
 
     const onAddPost = (values) => {
         props.addPost(values.newPostText);
