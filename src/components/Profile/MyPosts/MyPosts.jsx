@@ -4,14 +4,15 @@ import Post from "./Post/Post";
 import {Field, reduxForm} from 'redux-form';
 import { maxLengthCreator, required } from "../../../utils/validators/validators";
 import { Textarea } from "../../common/FormsControls/FormsControls";
+import Placeholder from "autoprefixer/lib/hacks/placeholder";
 
 const maxLength300 = maxLengthCreator(300);
 
-let AddNewPostsForm = (props) => {
+const AddNewPostsForm = (props) => {
     return (
         <form onSubmit={props.handleSubmit}>
             <div>
-                <Field component={Textarea} name={'newPostText'} validate={[required, maxLength300]}/>
+                <Field component={Textarea} name={'newPostText'} validate={[required, maxLength300]} Placeholder={'Post message'}/>
             </div>
             <div>
                 <button>Add post</button>
@@ -20,13 +21,13 @@ let AddNewPostsForm = (props) => {
     )
 }
 
-AddNewPostsForm = reduxForm({form: 'ProfileAddNewPostsForm'})(AddNewPostsForm);
+const AddNewPostsFormRedux = reduxForm({form: 'ProfileAddNewPostsForm'})(AddNewPostsForm);
 
 const MyPosts = React.memo((props) => {
 
     const postsElements = [...props.posts]//делаем копию массива чтоб не менять state
     .reverse()//переворачиваем последовательность постов
-    .map( p => <Post key={p.id} id={p.id} message={p.message} likesCount={p.likesCount} />);
+    .map( p => <Post key={p.id} message={p.message} likesCount={p.likesCount} />);
     //const newPostElement = React.createRef();
 
     const onAddPost = (values) => {
@@ -36,7 +37,7 @@ const MyPosts = React.memo((props) => {
     return (
         <div className={s.postsBlock}>
             <h3>My posts</h3>
-            <AddNewPostsForm onSubmit={onAddPost}/>
+            <AddNewPostsFormRedux onSubmit={onAddPost}/>
             <div className={s.posts}>
                 {postsElements}
             </div>
