@@ -8,7 +8,7 @@ import { reducer as formReducer } from 'redux-form';
 import appReducer from './app-reducer';
 
 
-const reducers = combineReducers({
+const rootReducer = combineReducers({
     profilePage: profileReducer,
     dialogsPage: dialogsReducer,
     usersPage: usersReducer,
@@ -16,8 +16,18 @@ const reducers = combineReducers({
     form: formReducer,
     app: appReducer
 })
-//для redux devtools
-const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
-const store = createStore(reducers, composeEnhancers(applyMiddleware(thunkMiddleware)));
 
+type RoorReducerType = typeof rootReducer; // (globalState: AppStateType) => AppStateType
+export type AppStateType = ReturnType<RoorReducerType>;
+
+type PropertiesTypes<T> = T extends {[key: string]: infer U} ? U : never;
+
+export type InferActionsTypes<T extends {[key: string]: (...args: any[]) => any}> = ReturnType<PropertiesTypes<T>>;
+
+//для redux devtools
+//@ts-ignore
+const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
+const store = createStore(rootReducer, composeEnhancers(applyMiddleware(thunkMiddleware)));
+//@ts-ignore
+window.__store__=store;
 export default store;

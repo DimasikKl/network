@@ -1,6 +1,6 @@
 {
-  "name": "network",
-  "version": "0.1.0",
+  "name": "vseti",
+  "version": "1",
   "homepage": "https://dimasikkl.github.io/network",
   "private": true,
   "dependencies": {
@@ -60,7 +60,13 @@
   },
   "devDependencies": {
     "@types/jest": "^29.0.0",
+    "@types/redux-form": "^8.3.5",
     "gh-pages": "^4.0.0",
     "react-test-renderer": "^18.2.0"
-  }
+  },
+  "description": "1",
+  "main": "index.js",
+  "repository": "https://github.com/DimasikKl/network.git",
+  "author": "Dmitriy Klep <dimakl93@yandex.ru>",
+  "license": "MIT"
 }

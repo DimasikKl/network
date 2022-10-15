@@ -4,7 +4,7 @@ import Post from "./Post/Post";
 import {Field, reduxForm} from 'redux-form';
 import { maxLengthCreator, required } from "../../../utils/validators/validators";
 import { Textarea } from "../../common/FormsControls/FormsControls";
-import Placeholder from "autoprefixer/lib/hacks/placeholder";
+//import Placeholder from "autoprefixer/lib/hacks/placeholder";
 
 const maxLength300 = maxLengthCreator(300);
 
