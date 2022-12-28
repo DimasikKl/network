@@ -6,8 +6,7 @@ const state = {
         {id: 2, message: 'by', likesCount: 120},
     ],
     profile: null,
-    status: '',
-    newPostText: ''
+    status: ''
 };
 
 it('length of post should be incremented', () => {

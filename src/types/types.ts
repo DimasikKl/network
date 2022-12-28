@@ -4,7 +4,7 @@ export type PostType = {
     likesCount: number
 }
 
-export type Contactstype = {
+export type ContactsType = {
     github: string
     vk: string
     facebook: string
@@ -27,6 +27,7 @@ export type ProfileType = {
     fullName: string
     contacts: Contactstype
     photos: PhotosType
+    aboutMe: string
 }
 
 export type UserType = {

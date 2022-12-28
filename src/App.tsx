@@ -1,7 +1,7 @@
 import React from "react";
 import './App.css'
 import Navbar from "./components/Navbar/Navbar";
-import {BrowserRouter, Route, Router, Routes} from "react-router-dom";
+import {BrowserRouter, Route, Routes} from "react-router-dom";
 import News from "./components/News/News";
 import Music from "./components/Music/Music";
 import Settings from "./components/Settings/Settings";
@@ -24,6 +24,8 @@ type DispatchPropsType = {
     initializeApp: () => void
 }
 
+const SuspendedProfile = withSuspense(ProfileContainer);
+const SuspendedDialog = withSuspense(DialogsContainer);
 class App extends React.Component<MapPropsType & DispatchPropsType> {
 
     catchAllUnhandledErrors = (e: PromiseRejectionEvent) => {
@@ -40,7 +42,7 @@ class App extends React.Component<MapPropsType & DispatchPropsType> {
     }
 
     render() {
-        if(this.props.initialized) {
+        if(!this.props.initialized) {
             return <Preloader/>
         }
         return (
@@ -49,9 +51,9 @@ class App extends React.Component<MapPropsType & DispatchPropsType> {
                 <Navbar/>
                 <div className='app-wrapper-content'>
                     <Routes>
-                        <Route path='/dialogs' element={withSuspense(DialogsContainer)} />
-                        <Route path='/Profile' element={withSuspense(ProfileContainer)}/>
-                            <Router path='/' element={withSuspense(ProfileContainer)}/>
+                        <Route path='/dialogs' element={SuspendedDialog} />
+                        <Route path='/Profile' element={SuspendedProfile}/>
+                            <Route path='/' element={SuspendedProfile}/>
                         <Route path='/users' element={<UsersContainer pageTitle={'Самураи'} />}/>
                         <Route path='/news' element={<News/>}/>
                         <Route path='/music' element={<Music/>}/>
@@ -74,7 +76,7 @@ const AppContainer = compose<React.ComponentType>(
     connect(mapStateToProps, {initializeApp})
 )(App);
 
-const MainApp: React.FC = (props) => {
+const MainApp: React.FC = () => {
     return (
         <BrowserRouter basename={process.env.PUBLIC_URL}>
             <Provider store={store}>

@@ -11,8 +11,7 @@ const initialState = {
         {id: 4, message: 'by', likesCount: 23},
     ] as Array<PostType>,
     profile: null as ProfileType | null,
-    status: '',
-    newPostText: ''
+    status: ''
 }
 
 export type InitialStatetype = typeof initialState;
@@ -30,8 +29,7 @@ const profileReducer = (state = initialState, action: ActionsType): InitialState
             };
             return {
                 ...state,
-                posts: [...state.posts, newPost],
-                newPostText: ''
+                posts: [...state.posts, newPost]
             }
         }
         case 'SN/PTOFILE/SET_USER_PROFILE': {
